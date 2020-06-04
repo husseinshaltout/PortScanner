@@ -1,5 +1,4 @@
-import sys
-
+from main import *
 try:
     import Tkinter as tk
 except ImportError:
@@ -12,14 +11,11 @@ except ImportError:
     import tkinter.ttk as ttk
     py3 = True
 
-import portscanner_support
-
 def vp_start_gui():
     '''Starting point when module is the main routine.'''
     global val, w, root
     root = tk.Tk()
     top = Toplevel1 (root)
-    portscanner_support.init(root, top)
     root.mainloop()
 
 w = None
@@ -29,7 +25,6 @@ def create_Toplevel1(root, *args, **kwargs):
     rt = root
     w = tk.Toplevel (root)
     top = Toplevel1 (w)
-    portscanner_support.init(w, top, *args, **kwargs)
     return (w, top)
 
 def destroy_Toplevel1():

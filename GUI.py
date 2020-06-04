@@ -33,6 +33,7 @@ def destroy_Toplevel1():
     w = None
 
 class Toplevel1:
+    
     def __init__(self, top=None):
         '''This class configures and populates the toplevel window.
            top is the toplevel containing window.'''
@@ -56,7 +57,7 @@ class Toplevel1:
         top.title("Port Scanner")
         top.configure(background="#d9d9d9")
 
-        self.Button1 = tk.Button(top)
+        self.Button1 = tk.Button(top, command=lambda: self.startscan())
         self.Button1.place(relx=0.034, rely=0.028, height=54, width=137)
         self.Button1.configure(activebackground="#ececec")
         self.Button1.configure(activeforeground="#000000")
@@ -88,26 +89,26 @@ class Toplevel1:
         self.Entry1.configure(foreground="#000000")
         self.Entry1.configure(insertbackground="black")
 
-        self.Entry2 = tk.Entry(top)
-        self.Entry2.place(relx=0.585, rely=0.223,height=20, relwidth=0.093)
-        self.Entry2.configure(background="white")
-        self.Entry2.configure(disabledforeground="#a3a3a3")
-        self.Entry2.configure(font="TkFixedFont")
-        self.Entry2.configure(foreground="#000000")
-        self.Entry2.configure(insertbackground="black")
+        # self.Entry2 = tk.Entry(top)
+        # self.Entry2.place(relx=0.585, rely=0.223,height=20, relwidth=0.093)
+        # self.Entry2.configure(background="white")
+        # self.Entry2.configure(disabledforeground="#a3a3a3")
+        # self.Entry2.configure(font="TkFixedFont")
+        # self.Entry2.configure(foreground="#000000")
+        # self.Entry2.configure(insertbackground="black")
 
-        self.Entry2_1 = tk.Entry(top)
-        self.Entry2_1.place(relx=0.74, rely=0.223,height=20, relwidth=0.093)
-        self.Entry2_1.configure(background="white")
-        self.Entry2_1.configure(cursor="fleur")
-        self.Entry2_1.configure(disabledforeground="#a3a3a3")
-        self.Entry2_1.configure(font="TkFixedFont")
-        self.Entry2_1.configure(foreground="#000000")
-        self.Entry2_1.configure(highlightbackground="#d9d9d9")
-        self.Entry2_1.configure(highlightcolor="black")
-        self.Entry2_1.configure(insertbackground="black")
-        self.Entry2_1.configure(selectbackground="#c4c4c4")
-        self.Entry2_1.configure(selectforeground="black")
+        # self.Entry2_1 = tk.Entry(top)
+        # self.Entry2_1.place(relx=0.74, rely=0.223,height=20, relwidth=0.093)
+        # self.Entry2_1.configure(background="white")
+        # self.Entry2_1.configure(cursor="fleur")
+        # self.Entry2_1.configure(disabledforeground="#a3a3a3")
+        # self.Entry2_1.configure(font="TkFixedFont")
+        # self.Entry2_1.configure(foreground="#000000")
+        # self.Entry2_1.configure(highlightbackground="#d9d9d9")
+        # self.Entry2_1.configure(highlightcolor="black")
+        # self.Entry2_1.configure(insertbackground="black")
+        # self.Entry2_1.configure(selectbackground="#c4c4c4")
+        # self.Entry2_1.configure(selectforeground="black")
 
         self.Label1 = tk.Label(top)
         self.Label1.place(relx=0.034, rely=0.223, height=21, width=31)
@@ -116,26 +117,26 @@ class Toplevel1:
         self.Label1.configure(foreground="#000000")
         self.Label1.configure(text='''Host''')
 
-        self.Label2 = tk.Label(top)
-        self.Label2.place(relx=0.499, rely=0.14, height=21, width=64)
-        self.Label2.configure(background="#d9d9d9")
-        self.Label2.configure(disabledforeground="#a3a3a3")
-        self.Label2.configure(foreground="#000000")
-        self.Label2.configure(text='''Port Range''')
+        # self.Label2 = tk.Label(top)
+        # self.Label2.place(relx=0.499, rely=0.14, height=21, width=64)
+        # self.Label2.configure(background="#d9d9d9")
+        # self.Label2.configure(disabledforeground="#a3a3a3")
+        # self.Label2.configure(foreground="#000000")
+        # self.Label2.configure(text='''Port Range''')
 
-        self.Label3 = tk.Label(top)
-        self.Label3.place(relx=0.499, rely=0.223, height=21, width=34)
-        self.Label3.configure(background="#d9d9d9")
-        self.Label3.configure(disabledforeground="#a3a3a3")
-        self.Label3.configure(foreground="#000000")
-        self.Label3.configure(text='''From''')
+        # self.Label3 = tk.Label(top)
+        # self.Label3.place(relx=0.499, rely=0.223, height=21, width=34)
+        # self.Label3.configure(background="#d9d9d9")
+        # self.Label3.configure(disabledforeground="#a3a3a3")
+        # self.Label3.configure(foreground="#000000")
+        # self.Label3.configure(text='''From''')
 
-        self.Label4 = tk.Label(top)
-        self.Label4.place(relx=0.688, rely=0.223, height=21, width=20)
-        self.Label4.configure(background="#d9d9d9")
-        self.Label4.configure(disabledforeground="#a3a3a3")
-        self.Label4.configure(foreground="#000000")
-        self.Label4.configure(text='''To''')
+        # self.Label4 = tk.Label(top)
+        # self.Label4.place(relx=0.688, rely=0.223, height=21, width=20)
+        # self.Label4.configure(background="#d9d9d9")
+        # self.Label4.configure(disabledforeground="#a3a3a3")
+        # self.Label4.configure(foreground="#000000")
+        # self.Label4.configure(text='''To''')
 
         self.Scrolledlistbox1 = ScrolledListBox(top)
         self.Scrolledlistbox1.place(relx=0.017, rely=0.363, relheight=0.601
@@ -165,6 +166,15 @@ class Toplevel1:
         self.Label5.configure(disabledforeground="#a3a3a3")
         self.Label5.configure(foreground="#000000")
         self.Label5.configure(text='''Time Elapsed''')
+    #Get host from Entry
+    def gethost(self):
+        self.hostname = self.Entry1.get()
+        return self.hostname
+    #Start scan button action
+    def startscan(self):
+        self.scanner = Scanner(self.gethost())
+        #Change Time Elapsed Text to total time
+        self.Message1.configure(text=self.scanner.scan())
 
     @staticmethod
     def popup1(event, *args, **kwargs):

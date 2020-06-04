@@ -152,12 +152,12 @@ class Toplevel1:
 
         self.Message1 = tk.Message(top)
         self.Message1.place(relx=0.706, rely=0.279, relheight=0.05
-                , relwidth=0.127)
+                , relwidth=0.265)
         self.Message1.configure(background="#d9d9d9")
         self.Message1.configure(foreground="#000000")
         self.Message1.configure(highlightbackground="#d9d9d9")
         self.Message1.configure(highlightcolor="black")
-        self.Message1.configure(text='''Time''')
+        self.Message1.configure(text='''''')
         self.Message1.configure(width=74)
 
         self.Label5 = tk.Label(top)

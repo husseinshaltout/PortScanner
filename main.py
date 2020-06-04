@@ -9,17 +9,22 @@ class Scanner(object):
         #Translate a host name to IPv4 address format
         self.RSIP = socket.gethostbyname(self.server)
     def scan(self):
+        print(self.server)
+        print(self.RSIP)
+        self.Tstart = datetime.now()
         try:
-            for port in range(1,1025):
+            for port in range(80,81):
                 #Creates an IPv4(AF_INET) stream socket for TCP(SOCK_STREAM) type connections
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 result = s.connect_ex((self.RSIP, port))
+                print("Port: ",port)
                 if result == 0:
-                    print("Port {}: 	 Open").format(port)
+                    print(port,": open")
                 s.close()
         #Cancel Scan
         #make it if cancel button is clicked
         except KeyboardInterrupt:
+            print("canceled")
             sys.exit()
 
         except socket.gaierror:
@@ -28,3 +33,10 @@ class Scanner(object):
         except socket.error:
             print ("Couldn't connect to server")
             sys.exit()
+        self.Tend = datetime.now()
+        self.totaltime = self.Tend - self.Tstart
+    def start(self):
+        self.scan()
+if __name__ == "__main__":
+    Scanner = Scanner('www.google.com')        
+    Scanner.start()

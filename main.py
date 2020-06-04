@@ -14,7 +14,7 @@ class Scanner(object):
         self.Tstart = datetime.now()
         self.rd = {}
         try:
-            for port in range(75,81):
+            for port in range(80,81):
                 #Creates an IPv4(AF_INET) stream socket for TCP(SOCK_STREAM) type connections
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 result = s.connect_ex((self.RSIP, port))
@@ -22,6 +22,8 @@ class Scanner(object):
                 if result == 0:
                     print(port,": open")
                     self.rd[port] = "Open"
+                else:
+                    self.rd[port] = "Closed"
                 s.close()
             print(self.rd)
         #Cancel Scan
@@ -37,7 +39,7 @@ class Scanner(object):
             sys.exit()
         self.Tend = datetime.now()
         self.totaltime = self.Tend - self.Tstart
-        return self.totaltime
+        return self.totaltime, self.rd
     def start(self):
         self.scan()
 if __name__ == "__main__":

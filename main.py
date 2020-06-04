@@ -13,7 +13,7 @@ class Scanner(object):
         print(self.RSIP)
         self.Tstart = datetime.now()
         try:
-            for port in range(80,81):
+            for port in range(89,81):
                 #Creates an IPv4(AF_INET) stream socket for TCP(SOCK_STREAM) type connections
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 result = s.connect_ex((self.RSIP, port))
@@ -22,7 +22,6 @@ class Scanner(object):
                     print(port,": open")
                 s.close()
         #Cancel Scan
-        #make it if cancel button is clicked
         except KeyboardInterrupt:
             print("canceled")
             sys.exit()
@@ -35,6 +34,7 @@ class Scanner(object):
             sys.exit()
         self.Tend = datetime.now()
         self.totaltime = self.Tend - self.Tstart
+        return self.totaltime
     def start(self):
         self.scan()
 if __name__ == "__main__":

@@ -21,8 +21,9 @@ class Scanner(object):
                 print("Port: ",port)
                 if result == 0:
                     print(port,": open")
-                    self.rd = [port] = "open"
+                    self.rd[port] = "Open"
                 s.close()
+            print(self.rd)
         #Cancel Scan
         except KeyboardInterrupt:
             print("canceled")

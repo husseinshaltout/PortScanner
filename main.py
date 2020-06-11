@@ -4,8 +4,10 @@ import sys
 from datetime import datetime
 
 class Scanner(object):
-    def __init__(self, host):
+    def __init__(self, host, PRfrom, PRto):
         self.server = host
+        self.PRfrom = PRfrom
+        self.PRto = PRto
         #Translate a host name to IPv4 address format
         self.RSIP = socket.gethostbyname(self.server)
     def scan(self):
@@ -14,7 +16,7 @@ class Scanner(object):
         self.Tstart = datetime.now()
         self.rd = {}
         try:
-            for port in range(79,81):
+            for port in range(int(self.PRfrom), int(self.PRto)):
                 #Creates an IPv4(AF_INET) stream socket for TCP(SOCK_STREAM) type connections
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 result = s.connect_ex((self.RSIP, port))
@@ -23,6 +25,7 @@ class Scanner(object):
                     print(port,": open")
                     self.rd[port] = "Open"
                 else:
+                    print(result)
                     self.rd[port] = "Closed"
                 s.close()
             print(self.rd)
@@ -43,5 +46,5 @@ class Scanner(object):
     def start(self):
         self.scan()
 if __name__ == "__main__":
-    Scanner = Scanner('www.google.com')        
+    Scanner = Scanner('www.google.com',80,81)        
     Scanner.start()

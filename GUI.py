@@ -78,54 +78,13 @@ class Toplevel1:
         self.Entry1.configure(foreground="#000000")
         self.Entry1.configure(insertbackground="black")
 
-        # self.Entry2 = tk.Entry(top)
-        # self.Entry2.place(relx=0.585, rely=0.223,height=20, relwidth=0.093)
-        # self.Entry2.configure(background="white")
-        # self.Entry2.configure(disabledforeground="#a3a3a3")
-        # self.Entry2.configure(font="TkFixedFont")
-        # self.Entry2.configure(foreground="#000000")
-        # self.Entry2.configure(insertbackground="black")
-
-        # self.Entry2_1 = tk.Entry(top)
-        # self.Entry2_1.place(relx=0.74, rely=0.223,height=20, relwidth=0.093)
-        # self.Entry2_1.configure(background="white")
-        # self.Entry2_1.configure(cursor="fleur")
-        # self.Entry2_1.configure(disabledforeground="#a3a3a3")
-        # self.Entry2_1.configure(font="TkFixedFont")
-        # self.Entry2_1.configure(foreground="#000000")
-        # self.Entry2_1.configure(highlightbackground="#d9d9d9")
-        # self.Entry2_1.configure(highlightcolor="black")
-        # self.Entry2_1.configure(insertbackground="black")
-        # self.Entry2_1.configure(selectbackground="#c4c4c4")
-        # self.Entry2_1.configure(selectforeground="black")
-
         self.Label1 = tk.Label(top)
         self.Label1.place(relx=0.034, rely=0.223, height=21, width=31)
         self.Label1.configure(background="#d9d9d9")
         self.Label1.configure(disabledforeground="#a3a3a3")
         self.Label1.configure(foreground="#000000")
         self.Label1.configure(text='''Host''')
-
-        # self.Label2 = tk.Label(top)
-        # self.Label2.place(relx=0.499, rely=0.14, height=21, width=64)
-        # self.Label2.configure(background="#d9d9d9")
-        # self.Label2.configure(disabledforeground="#a3a3a3")
-        # self.Label2.configure(foreground="#000000")
-        # self.Label2.configure(text='''Port Range''')
-
-        # self.Label3 = tk.Label(top)
-        # self.Label3.place(relx=0.499, rely=0.223, height=21, width=34)
-        # self.Label3.configure(background="#d9d9d9")
-        # self.Label3.configure(disabledforeground="#a3a3a3")
-        # self.Label3.configure(foreground="#000000")
-        # self.Label3.configure(text='''From''')
-
-        # self.Label4 = tk.Label(top)
-        # self.Label4.place(relx=0.688, rely=0.223, height=21, width=20)
-        # self.Label4.configure(background="#d9d9d9")
-        # self.Label4.configure(disabledforeground="#a3a3a3")
-        # self.Label4.configure(foreground="#000000")
-        # self.Label4.configure(text='''To''')
+        
         self.vsb = tk.Scrollbar(orient="vertical", command=self.OnVsb)
 
         #Port list
@@ -152,31 +111,84 @@ class Toplevel1:
         self.Listbox1.bind("<MouseWheel>", self.OnMouseWheel)
         self.Listbox1_1.bind("<MouseWheel>", self.OnMouseWheel)
 
-
-
         self.Message1 = tk.Message(top)
-        self.Message1.place(relx=0.706, rely=0.223, relheight=0.07
+        self.Message1.place(relx=0.706, rely=0.300, relheight=0.07
                 , relwidth=0.300)
         self.Message1.configure(background="#d9d9d9")
         self.Message1.configure(foreground="#000000")
         self.Message1.configure(highlightbackground="#d9d9d9")
         self.Message1.configure(highlightcolor="black")
-        self.Message1.configure(text='''''')
         self.Message1.configure(width=74)
 
         self.Label5 = tk.Label(top)
-        self.Label5.place(relx=0.499, rely=0.223, height=21, width=76)
+        self.Label5.place(relx=0.499, rely=0.300, height=21, width=76)
         self.Label5.configure(background="#d9d9d9")
         self.Label5.configure(disabledforeground="#a3a3a3")
         self.Label5.configure(foreground="#000000")
         self.Label5.configure(text='''Time Elapsed''')
+
+
+
+        self.Labelframe1 = tk.LabelFrame(top)
+        self.Labelframe1.place(relx=0.482, rely=0.028, relheight=0.209
+                , relwidth=0.465)
+        self.Labelframe1.configure(relief='groove')
+        self.Labelframe1.configure(foreground="black")
+        self.Labelframe1.configure(text='''Port Range''')
+        self.Labelframe1.configure(background="#d9d9d9")
+
+        self.Entry2 = tk.Entry(self.Labelframe1)
+        self.Entry2.place(relx=0.037, rely=0.533, height=20, relwidth=0.348
+                , bordermode='ignore')
+        self.Entry2.configure(background="white")
+        self.Entry2.configure(disabledforeground="#a3a3a3")
+        self.Entry2.configure(font="TkFixedFont")
+        self.Entry2.configure(foreground="#000000")
+        self.Entry2.configure(insertbackground="black")
+
+        self.Entry2_1 = tk.Entry(self.Labelframe1)
+        self.Entry2_1.place(relx=0.556, rely=0.533, height=20, relwidth=0.348
+                , bordermode='ignore')
+        self.Entry2_1.configure(background="white")
+        self.Entry2_1.configure(disabledforeground="#a3a3a3")
+        self.Entry2_1.configure(font="TkFixedFont")
+        self.Entry2_1.configure(foreground="#000000")
+        self.Entry2_1.configure(highlightbackground="#d9d9d9")
+        self.Entry2_1.configure(highlightcolor="black")
+        self.Entry2_1.configure(insertbackground="black")
+        self.Entry2_1.configure(selectbackground="#c4c4c4")
+        self.Entry2_1.configure(selectforeground="black")
+
+        self.Label2 = tk.Label(self.Labelframe1)
+        self.Label2.place(relx=0.037, rely=0.260, height=21, width=34
+                , bordermode='ignore')
+        self.Label2.configure(background="#d9d9d9")
+        self.Label2.configure(disabledforeground="#a3a3a3")
+        self.Label2.configure(foreground="#000000")
+        self.Label2.configure(text='''From:''')
+
+        self.Label2_2 = tk.Label(self.Labelframe1)
+        self.Label2_2.place(relx=0.556, rely=0.260, height=21, width=34
+                , bordermode='ignore')
+        self.Label2_2.configure(activebackground="#f9f9f9")
+        self.Label2_2.configure(activeforeground="black")
+        self.Label2_2.configure(background="#d9d9d9")
+        self.Label2_2.configure(disabledforeground="#a3a3a3")
+        self.Label2_2.configure(foreground="#000000")
+        self.Label2_2.configure(highlightbackground="#d9d9d9")
+        self.Label2_2.configure(highlightcolor="black")
+        self.Label2_2.configure(text='''To:''')
+
     #Get host from Entry
     def gethost(self):
         self.hostname = self.Entry1.get()
-        return self.hostname
+        self.Rfrom = self.Entry2.get()
+        self.Rto = self.Entry2_1.get()
+        return self.hostname, self.Rfrom, self.Rto 
     #Start scan button action
     def startscan(self):
-        self.scanner = Scanner(self.gethost())
+        self.gh = self.gethost()
+        self.scanner = Scanner(self.gh[0], self.gh[1],self.gh[2])
         self.results = self.scanner.scan()
         #Change Time Elapsed Text to total time
         self.Message1.configure(text=self.results[0])
@@ -193,34 +205,8 @@ class Toplevel1:
     def OnMouseWheel(self, event):
         self.Listbox1.yview("scroll", event.delta,"units")
         self.Listbox1_1.yview("scroll",event.delta,"units")
-        # this prevents default bindings from firing, which
-        # would end up scrolling the widget twice
         return ("break")
-    @staticmethod
-    def popup1(event, *args, **kwargs):
-        Popupmenu1 = tk.Menu(root, tearoff=0)
-        Popupmenu1.configure(activebackground="#f9f9f9")
-        Popupmenu1.configure(activeborderwidth="1")
-        Popupmenu1.configure(activeforeground="black")
-        Popupmenu1.configure(background="#d9d9d9")
-        Popupmenu1.configure(borderwidth="1")
-        Popupmenu1.configure(disabledforeground="#a3a3a3")
-        Popupmenu1.configure(font="{Segoe UI} 9")
-        Popupmenu1.configure(foreground="black")
-        Popupmenu1.post(event.x_root, event.y_root)
 
-    @staticmethod
-    def popup2(event, *args, **kwargs):
-        Popupmenu2 = tk.Menu(root, tearoff=0)
-        Popupmenu2.configure(activebackground="#f9f9f9")
-        Popupmenu2.configure(activeborderwidth="1")
-        Popupmenu2.configure(activeforeground="black")
-        Popupmenu2.configure(background="#d9d9d9")
-        Popupmenu2.configure(borderwidth="1")
-        Popupmenu2.configure(disabledforeground="#a3a3a3")
-        Popupmenu2.configure(font="{Segoe UI} 9")
-        Popupmenu2.configure(foreground="black")
-        Popupmenu2.post(event.x_root, event.y_root)
 
 
 if __name__ == '__main__':

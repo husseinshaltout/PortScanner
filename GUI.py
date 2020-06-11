@@ -57,30 +57,19 @@ class Toplevel1:
         top.title("Port Scanner")
         top.configure(background="#d9d9d9")
 
-        self.Button1 = tk.Button(top, command=lambda: self.startscan())
+        #Scan Button
+        self.Button1 = ttk.Button(top, command=lambda: self.startscan())
         self.Button1.place(relx=0.034, rely=0.028, height=54, width=137)
-        self.Button1.configure(activebackground="#ececec")
-        self.Button1.configure(activeforeground="#000000")
-        self.Button1.configure(background="#d9d9d9")
-        self.Button1.configure(disabledforeground="#a3a3a3")
-        self.Button1.configure(foreground="#000000")
-        self.Button1.configure(highlightbackground="#d9d9d9")
-        self.Button1.configure(highlightcolor="black")
-        self.Button1.configure(pady="0")
+        self.Button1.configure(takefocus="")
+        # self.Button1 .configure(cursor="fleur")
         self.Button1.configure(text='''Scan''')
-
-        self.Button2 = tk.Button(top)
+        #Cancel Button
+        self.Button2 = ttk.Button(top, command=lambda: self.cancel_btn())
         self.Button2.place(relx=0.293, rely=0.028, height=54, width=77)
-        self.Button2.configure(activebackground="#ececec")
-        self.Button2.configure(activeforeground="#000000")
-        self.Button2.configure(background="#d9d9d9")
-        self.Button2.configure(disabledforeground="#a3a3a3")
-        self.Button2.configure(foreground="#000000")
-        self.Button2.configure(highlightbackground="#d9d9d9")
-        self.Button2.configure(highlightcolor="black")
-        self.Button2.configure(pady="0")
+        self.Button2.configure(takefocus="")
+        # self.Button2.configure(cursor="fleur")
         self.Button2.configure(text='''Cancel''')
-
+        #Host Entry
         self.Entry1 = tk.Entry(top)
         self.Entry1.place(relx=0.138, rely=0.223,height=20, relwidth=0.282)
         self.Entry1.configure(background="white")
@@ -137,22 +126,37 @@ class Toplevel1:
         # self.Label4.configure(disabledforeground="#a3a3a3")
         # self.Label4.configure(foreground="#000000")
         # self.Label4.configure(text='''To''')
+        self.vsb = tk.Scrollbar(orient="vertical", command=self.OnVsb)
 
-        self.Scrolledlistbox1 = ScrolledListBox(top)
-        self.Scrolledlistbox1.place(relx=0.017, rely=0.363, relheight=0.601
-                , relwidth=0.966)
-        self.Scrolledlistbox1.configure(background="white")
-        self.Scrolledlistbox1.configure(disabledforeground="#a3a3a3")
-        self.Scrolledlistbox1.configure(font="TkFixedFont")
-        self.Scrolledlistbox1.configure(foreground="black")
-        self.Scrolledlistbox1.configure(highlightbackground="#d9d9d9")
-        self.Scrolledlistbox1.configure(highlightcolor="#d9d9d9")
-        self.Scrolledlistbox1.configure(selectbackground="#c4c4c4")
-        self.Scrolledlistbox1.configure(selectforeground="black")
+        #Port list
+        self.Listbox1 = tk.Listbox(top, yscrollcommand=self.vsb.set)
+        self.Listbox1.place(relx=0.017, rely=0.391, relheight=0.592
+                , relwidth=0.454)
+        self.Listbox1.configure(background="white")
+        self.Listbox1.configure(disabledforeground="#a3a3a3")
+        self.Listbox1.configure(font="TkFixedFont")
+        self.Listbox1.configure(foreground="#000000")
+        #Status list
+        self.Listbox1_1 = tk.Listbox(top, yscrollcommand=self.vsb.set)
+        self.Listbox1_1.place(relx=0.465, rely=0.391, relheight=0.592
+                , relwidth=0.472)
+        self.Listbox1_1.configure(background="white")
+        self.Listbox1_1.configure(disabledforeground="#a3a3a3")
+        self.Listbox1_1.configure(font="TkFixedFont")
+        self.Listbox1_1.configure(foreground="#000000")
+        self.Listbox1_1.configure(highlightbackground="#d9d9d9")
+        self.Listbox1_1.configure(highlightcolor="black")
+        self.Listbox1_1.configure(selectbackground="#c4c4c4")
+        self.Listbox1_1.configure(selectforeground="black")
+        self.vsb.pack(side="right",fill="y")
+        self.Listbox1.bind("<MouseWheel>", self.OnMouseWheel)
+        self.Listbox1_1.bind("<MouseWheel>", self.OnMouseWheel)
+
+
 
         self.Message1 = tk.Message(top)
-        self.Message1.place(relx=0.706, rely=0.279, relheight=0.05
-                , relwidth=0.265)
+        self.Message1.place(relx=0.706, rely=0.223, relheight=0.07
+                , relwidth=0.300)
         self.Message1.configure(background="#d9d9d9")
         self.Message1.configure(foreground="#000000")
         self.Message1.configure(highlightbackground="#d9d9d9")
@@ -161,7 +165,7 @@ class Toplevel1:
         self.Message1.configure(width=74)
 
         self.Label5 = tk.Label(top)
-        self.Label5.place(relx=0.499, rely=0.279, height=21, width=76)
+        self.Label5.place(relx=0.499, rely=0.223, height=21, width=76)
         self.Label5.configure(background="#d9d9d9")
         self.Label5.configure(disabledforeground="#a3a3a3")
         self.Label5.configure(foreground="#000000")
@@ -173,9 +177,25 @@ class Toplevel1:
     #Start scan button action
     def startscan(self):
         self.scanner = Scanner(self.gethost())
+        self.results = self.scanner.scan()
         #Change Time Elapsed Text to total time
-        self.Message1.configure(text=self.scanner.scan())
+        self.Message1.configure(text=self.results[0])
+        for x,y in self.results[1].items():
+            self.Listbox1.insert(tk.END, x)
+            self.Listbox1_1.insert(tk.END, y)
+    def cancel_btn(self):
+        sys.exit()
 
+    def OnVsb(self, *args):
+        self.Listbox1.yview(*args)
+        self.Listbox1_1.yview(*args)
+
+    def OnMouseWheel(self, event):
+        self.Listbox1.yview("scroll", event.delta,"units")
+        self.Listbox1_1.yview("scroll",event.delta,"units")
+        # this prevents default bindings from firing, which
+        # would end up scrolling the widget twice
+        return ("break")
     @staticmethod
     def popup1(event, *args, **kwargs):
         Popupmenu1 = tk.Menu(root, tearoff=0)
@@ -202,129 +222,6 @@ class Toplevel1:
         Popupmenu2.configure(foreground="black")
         Popupmenu2.post(event.x_root, event.y_root)
 
-# The following code is added to facilitate the Scrolled widgets you specified.
-class AutoScroll(object):
-    '''Configure the scrollbars for a widget.'''
-
-    def __init__(self, master):
-        #  Rozen. Added the try-except clauses so that this class
-        #  could be used for scrolled entry widget for which vertical
-        #  scrolling is not supported. 5/7/14.
-        try:
-            vsb = ttk.Scrollbar(master, orient='vertical', command=self.yview)
-        except:
-            pass
-        hsb = ttk.Scrollbar(master, orient='horizontal', command=self.xview)
-
-        #self.configure(yscrollcommand=_autoscroll(vsb),
-        #    xscrollcommand=_autoscroll(hsb))
-        try:
-            self.configure(yscrollcommand=self._autoscroll(vsb))
-        except:
-            pass
-        self.configure(xscrollcommand=self._autoscroll(hsb))
-
-        self.grid(column=0, row=0, sticky='nsew')
-        try:
-            vsb.grid(column=1, row=0, sticky='ns')
-        except:
-            pass
-        hsb.grid(column=0, row=1, sticky='ew')
-
-        master.grid_columnconfigure(0, weight=1)
-        master.grid_rowconfigure(0, weight=1)
-
-        # Copy geometry methods of master  (taken from ScrolledText.py)
-        if py3:
-            methods = tk.Pack.__dict__.keys() | tk.Grid.__dict__.keys() \
-                  | tk.Place.__dict__.keys()
-        else:
-            methods = tk.Pack.__dict__.keys() + tk.Grid.__dict__.keys() \
-                  + tk.Place.__dict__.keys()
-
-        for meth in methods:
-            if meth[0] != '_' and meth not in ('config', 'configure'):
-                setattr(self, meth, getattr(master, meth))
-
-    @staticmethod
-    def _autoscroll(sbar):
-        '''Hide and show scrollbar as needed.'''
-        def wrapped(first, last):
-            first, last = float(first), float(last)
-            if first <= 0 and last >= 1:
-                sbar.grid_remove()
-            else:
-                sbar.grid()
-            sbar.set(first, last)
-        return wrapped
-
-    def __str__(self):
-        return str(self.master)
-
-def _create_container(func):
-    '''Creates a ttk Frame with a given master, and use this new frame to
-    place the scrollbars and the widget.'''
-    def wrapped(cls, master, **kw):
-        container = ttk.Frame(master)
-        container.bind('<Enter>', lambda e: _bound_to_mousewheel(e, container))
-        container.bind('<Leave>', lambda e: _unbound_to_mousewheel(e, container))
-        return func(cls, container, **kw)
-    return wrapped
-
-class ScrolledListBox(AutoScroll, tk.Listbox):
-    '''A standard Tkinter Listbox widget with scrollbars that will
-    automatically show/hide as needed.'''
-    @_create_container
-    def __init__(self, master, **kw):
-        tk.Listbox.__init__(self, master, **kw)
-        AutoScroll.__init__(self, master)
-    def size_(self):
-        sz = tk.Listbox.size(self)
-        return sz
-
-import platform
-def _bound_to_mousewheel(event, widget):
-    child = widget.winfo_children()[0]
-    if platform.system() == 'Windows' or platform.system() == 'Darwin':
-        child.bind_all('<MouseWheel>', lambda e: _on_mousewheel(e, child))
-        child.bind_all('<Shift-MouseWheel>', lambda e: _on_shiftmouse(e, child))
-    else:
-        child.bind_all('<Button-4>', lambda e: _on_mousewheel(e, child))
-        child.bind_all('<Button-5>', lambda e: _on_mousewheel(e, child))
-        child.bind_all('<Shift-Button-4>', lambda e: _on_shiftmouse(e, child))
-        child.bind_all('<Shift-Button-5>', lambda e: _on_shiftmouse(e, child))
-
-def _unbound_to_mousewheel(event, widget):
-    if platform.system() == 'Windows' or platform.system() == 'Darwin':
-        widget.unbind_all('<MouseWheel>')
-        widget.unbind_all('<Shift-MouseWheel>')
-    else:
-        widget.unbind_all('<Button-4>')
-        widget.unbind_all('<Button-5>')
-        widget.unbind_all('<Shift-Button-4>')
-        widget.unbind_all('<Shift-Button-5>')
-
-def _on_mousewheel(event, widget):
-    if platform.system() == 'Windows':
-        widget.yview_scroll(-1*int(event.delta/120),'units')
-    elif platform.system() == 'Darwin':
-        widget.yview_scroll(-1*int(event.delta),'units')
-    else:
-        if event.num == 4:
-            widget.yview_scroll(-1, 'units')
-        elif event.num == 5:
-            widget.yview_scroll(1, 'units')
-
-def _on_shiftmouse(event, widget):
-    if platform.system() == 'Windows':
-        widget.xview_scroll(-1*int(event.delta/120), 'units')
-    elif platform.system() == 'Darwin':
-        widget.xview_scroll(-1*int(event.delta), 'units')
-    else:
-        if event.num == 4:
-            widget.xview_scroll(-1, 'units')
-        elif event.num == 5:
-            widget.xview_scroll(1, 'units')
 
 if __name__ == '__main__':
     vp_start_gui()

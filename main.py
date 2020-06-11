@@ -14,7 +14,7 @@ class Scanner(object):
         self.Tstart = datetime.now()
         self.rd = {}
         try:
-            for port in range(80,81):
+            for port in range(79,81):
                 #Creates an IPv4(AF_INET) stream socket for TCP(SOCK_STREAM) type connections
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 result = s.connect_ex((self.RSIP, port))
